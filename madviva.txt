@@ -1,0 +1,347 @@
+1. Creating "Hello World" Application
+What is the purpose of setContentView() in Android?
+
+It links the XML layout file with the Activity, defining what the user sees on the screen.
+
+2.Which file is responsible for defining the UI layout in a basic Hello World app?
+
+activity_main.xml (or any other defined layout file in res/layout/).
+
+3.What is the role of AndroidManifest.xml in an Android application?
+
+It declares app components (activities, services), permissions, and metadata required for the app.
+
+4.Why is MainActivity extended from AppCompatActivity?
+
+To ensure backward compatibility with older Android versions while using Material Design features.
+
+5.What is the significance of the onCreate() method in an Activity?
+
+It is called when the Activity starts and is used for initialization (e.g., UI setup, data binding).
+
+2. Displaying Message Based on Screen Orientation
+1.How can you detect screen orientation changes in Android?
+
+By checking getResources().getConfiguration().orientation or overriding onConfigurationChanged().
+
+2.What is the difference between portrait and landscape modes?
+
+Portrait is taller than wide, while Landscape is wider than tall.
+
+3.How do you create different layouts for different screen orientations?
+
+By creating separate layout files in res/layout-port and res/layout-land folders.
+
+4.What lifecycle methods are called when the screen orientation changes?
+
+onPause(), onStop(), onDestroy(), onCreate(), onStart(), onResume() (Activity restarts).
+
+5.How can you prevent an Activity from restarting on orientation change?
+
+Use android:configChanges="orientation|screenSize" in AndroidManifest.xml and handle changes manually in onConfigurationChanged().
+
+3. Login Window Using UI Controls
+1.What are the common UI controls used in a Login screen?
+
+EditText (username/password), Button (login), TextView (labels), CheckBox (remember me).
+
+2.How do you validate user input in a Login form?
+
+Using conditions (e.g., TextUtils.isEmpty(), regex for email validation).
+
+3.What is the purpose of EditText in Android?
+
+To allow users to input text (e.g., username, password).
+
+4.How can you secure a password field in Android?
+
+Use inputType="textPassword" in XML to hide characters.
+
+5.What is an OnClickListener, and how is it used in a Login button?
+
+It listens for button clicks and executes code when the button is pressed (e.g., validate credentials).
+
+4. Implementing New Activity Using Intents & Content Provider
+1.Difference between Explicit and Implicit Intents?
+
+Explicit: Targets a specific component (e.g., new Intent(this, SecondActivity.class)).
+
+Implicit: Declares an action (e.g., Intent.ACTION_VIEW) and lets the system choose an app.
+
+2.How do you pass data between activities using Intents?
+
+Using putExtra() (e.g., intent.putExtra("key", value)).
+
+3.What is a Content Provider, and why is it used?
+
+It allows sharing data between apps (e.g., Contacts, Media) securely.
+
+4.How do you call another app using an Implicit Intent?
+
+Example:
+
+java
+Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+startActivity(intent);
+5.What is the role of Intent Filters in AndroidManifest.xml?
+
+They declare which intents an app component can respond to (e.g., opening a URL).
+
+5. Custom Designed Opening Screen (Splash Screen)
+1.Purpose of a Splash Screen?
+
+To display branding while the app loads in the background.
+
+2.How can you delay the Splash Screen for a few seconds?
+
+Using Handler.postDelayed() or a Timer.
+
+3.Best way to implement a Splash Screen?
+
+Use a dedicated SplashActivity or Theme with a windowBackground drawable.
+
+4.Why avoid long delays in a Splash Screen?
+
+It creates a poor user experience (users prefer fast app loading).
+
+5.How to make a full-screen Splash Screen?
+
+Use android:theme="@style/Theme.AppCompat.NoActionBar" in AndroidManifest.xml.
+
+6. UI with All Views
+1.Difference between LinearLayout and RelativeLayout?
+
+LinearLayout arranges views sequentially (horizontally/vertically), while RelativeLayout positions views relative to each other.
+
+2.How to handle CheckBox and RadioButton interactions?
+
+Use setOnCheckedChangeListener() to detect state changes.
+
+3.What is RecyclerView, and how is it different from ListView?
+
+RecyclerView is more efficient (recycles views) and supports flexible layouts (Grid, Staggered).
+
+4.How to implement a dropdown menu using Spinner?
+
+Define an Adapter (e.g., ArrayAdapter) and set it to the Spinner.
+
+5.Purpose of ScrollView?
+
+To enable scrolling when content exceeds screen height.
+
+8. Creating Menu in Application
+1.Different types of menus in Android?
+
+Options Menu, Context Menu, Popup Menu.
+
+2.How to create an Options Menu?
+
+Override onCreateOptionsMenu() and inflate an XML menu resource.
+
+3.Difference between onCreateOptionsMenu() and onOptionsItemSelected()?
+
+onCreateOptionsMenu() inflates the menu, while onOptionsItemSelected() handles item clicks.
+
+4.How to add icons to a menu?
+
+Use the android:icon attribute in the menu XML item.
+
+5.What is a Context Menu, and how is it implemented?
+
+A floating menu triggered by a long press. Override onCreateContextMenu() and onContextItemSelected().
+
+9. Read/Write Local Data
+1.Different ways to store data locally?
+
+SharedPreferences, Internal Storage, External Storage, SQLite, Room.
+
+2.What is SharedPreferences, and when to use it?
+
+Stores key-value pairs (e.g., user settings). Best for small, simple data.
+
+3.How to read/write files in Internal Storage?
+
+Use openFileOutput() and openFileInput() methods.
+
+4.Difference between Internal and External Storage?
+
+Internal: Private to the app. External: Accessible by other apps (requires permissions).
+
+5.How to check for external storage availability?
+
+Use Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED).
+
+10. Create/Read/Write Data with SQLite Database
+1.What is SQLite, and why is it used?
+
+A lightweight, embedded database for structured data storage.
+
+2.Main components of SQLite in Android?
+
+SQLiteOpenHelper (manages DB creation/versioning), SQLiteDatabase (executes queries).
+
+3.How to perform CRUD operations in SQLite?
+
+Insert: db.insert()
+
+Read: db.query() or rawQuery()
+
+Update: db.update()
+
+Delete: db.delete()
+
+4.Purpose of onUpgrade() in SQLiteOpenHelper?
+
+Handles database schema changes when the app is updated.
+
+5.How to view an app’s SQLite database?
+
+Use Android Studio’s Database Inspector or ADB shell with SQLite3.
+
+11. Send and Receive SMS
+1.Permissions required for SMS?
+
+SEND_SMS, RECEIVE_SMS, READ_SMS (depending on functionality).
+
+2.How to send SMS programmatically?
+
+Using SmsManager.sendTextMessage().
+
+3.What is a BroadcastReceiver, and how is it used for SMS?
+
+Listens for incoming SMS (e.g., android.provider.Telephony.SMS_RECEIVED).
+
+4.How to intercept incoming SMS?
+
+Register a BroadcastReceiver for SMS_RECEIVED in AndroidManifest.xml.
+
+5.Security concerns with SMS handling?
+
+Malicious apps may read sensitive SMS (OTPs). Use runtime permissions carefully.
+
+
+
+
+
+
+
+
+12. Create an Application to Send an Email
+Viva Questions:
+1.What permissions are required to send an email in Android?
+
+No special permissions are needed if using Intent.ACTION_SEND, but internet permission (INTERNET) is required if using SMTP directly.
+
+2.How do you send an email using an Intent?
+
+Example:
+
+java
+Intent emailIntent = new Intent(Intent.ACTION_SEND);
+emailIntent.setType("message/rfc822");
+emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"recipient@example.com"});
+emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+emailIntent.putExtra(Intent.EXTRA_TEXT, "Email body");
+startActivity(Intent.createChooser(emailIntent, "Send email via:"));
+3.What is the purpose of Intent.createChooser() in email sending?
+
+It allows the user to select an email client (Gmail, Outlook, etc.) if multiple apps can handle the intent.
+
+4.Can you send an email without user interaction?
+
+Yes, by using JavaMail API or third-party libraries, but it requires SMTP configuration.
+
+5.Why is message/rfc822 used as the MIME type?
+
+It specifies that the intent is for sending email messages (RFC 822 is the standard for email format).
+
+13. Display Map Based on Current/Given Location
+Viva Questions:
+1.What is the Google Maps API, and how is it integrated into Android?
+
+It allows embedding maps in an app using GoogleMap and requires an API key from Google Cloud.
+
+2.How do you get the user’s current location in Android?
+
+Using FusedLocationProviderClient (part of Google Play Services).
+
+3.What permissions are needed to access the user’s location?
+
+ACCESS_FINE_LOCATION (for GPS) or ACCESS_COARSE_LOCATION (for network-based location).
+
+4.How do you display a marker on a map at a given location?
+
+Example:
+
+java
+LatLng location = new LatLng(37.422, -122.084);
+googleMap.addMarker(new MarkerOptions().position(location).title("Marker"));
+googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
+5.What is onMapReady() callback used for?
+
+It is called when the map is ready to be used, ensuring that GoogleMap is not null.
+
+14. Login Module with Success/Fail Feedback
+Viva Questions:
+1.How do you validate a username and password in Android?
+
+By comparing input (EditText.getText()) with stored credentials (e.g., in SharedPreferences or a database).
+
+2.What is a Toast, and how is it used for login failure?
+
+A Toast is a short popup message. Example:
+
+java
+Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
+3.How do you change a TextView dynamically after login success?
+
+Example:
+
+java
+TextView statusText = findViewById(R.id.textViewStatus);
+statusText.setText("Login Successful");
+4.What is the purpose of setOnClickListener in a login button?
+
+It defines what happens when the button is clicked (e.g., validate credentials).
+
+5.How can you securely store login credentials?
+
+Using SharedPreferences (for simple storage) or encrypted databases like Room with EncryptedSharedPreferences.
+
+15. Deploying Android Applications
+Viva Questions:
+1.What is an APK file?
+
+Android Package Kit (APK) is the file format used to distribute and install Android apps.
+
+2.How do you generate a signed APK in Android Studio?
+
+Build → Generate Signed Bundle / APK → APK → Configure keystore and build.
+
+3.What is a keystore, and why is it important?
+
+A keystore stores cryptographic keys used to sign APKs. It ensures app updates come from the same developer.
+
+4.What is Google Play Store’s app signing program?
+
+Google manages the app signing key, allowing secure updates even if the developer loses their key.
+
+5.What are the steps to publish an app on the Play Store?
+
+Create a developer account.
+
+Prepare assets (icons, screenshots).
+
+Generate a signed APK/AAB.
+
+Upload to Google Play Console.
+
+Fill in store listing and submit for review.
+
+Summary of All Topics
+Topic	                Key Points
+Send Email	Intent.ACTION_SEND, message/rfc822, no permissions needed
+Maps & Location	Google Maps API, FusedLocationProviderClient, ACCESS_FINE_LOCATION
+Login Module	EditText validation, Toast for errors, TextView updates
+Deployment	APK, keystore, Google Play Store publishing
+
